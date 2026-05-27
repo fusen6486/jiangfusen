@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>蒋福森 | 价值投资</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: "Helvetica Neue", "Microsoft YaHei", sans-serif;
+  background: #141414;
+  color: #e5e5e5;
+  overflow-x: hidden;
+}
+
+/* Nav */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 60px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+  transition: background 0.3s;
+}
+nav.scrolled { background: rgba(20,20,20,0.95); }
+nav .logo {
+  font-size: 28px; font-weight: 900; color: #e50914;
+  letter-spacing: -1px; text-transform: uppercase;
+}
+nav .nav-links { display: flex; gap: 24px; list-style: none; }
+nav .nav-links a {
+  color: #e5e5e5; text-decoration: none; font-size: 14px;
+  transition: color 0.3s;
+}
+nav .nav-links a:hover { color: #b3b3b3; }
+nav .nav-right { display: flex; align-items: center; gap: 16px; }
+
+/* Hero */
+.hero {
+  position: relative; height: 100vh; min-height: 700px;
+  display: flex; align-items: center; padding: 0 60px;
+  background: linear-gradient(77deg, #141414 0%, #141414 40%, rgba(20,20,20,0.4) 60%, rgba(20,20,20,0.1) 100%),
+              url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><linearGradient id="g" x1="0%25" y1="0%25" x2="100%25" y2="100%25"><stop offset="0%25" style="stop-color:%231a1a2e"/><stop offset="50%25" style="stop-color:%23162a1a"/><stop offset="100%25" style="stop-color:%232a1a1a"/></linearGradient></defs><rect fill="url(%23g)" width="1200" height="600"/><circle cx="200" cy="150" r="80" fill="none" stroke="%23e5091422" stroke-width="2"/><circle cx="400" cy="300" r="120" fill="none" stroke="%23e5091418" stroke-width="1"/><circle cx="800" cy="200" r="100" fill="none" stroke="%23e5091420" stroke-width="2"/><circle cx="1000" cy="100" r="60" fill="none" stroke="%23e5091415" stroke-width="1"/><circle cx="600" cy="500" r="90" fill="none" stroke="%23e5091410" stroke-width="1"/><line x1="100" y1="400" x2="500" y2="450" stroke="%23e5091408" stroke-width="1"/><line x1="700" y1="350" x2="1100" y2="400" stroke="%23e5091408" stroke-width="1"/></svg>');
+  background-size: cover; background-position: center;
+}
+.hero::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 100px;
+  background: linear-gradient(0deg, #141414 0%, transparent 100%);
+  z-index: 1;
+}
+.hero-content { position: relative; z-index: 2; max-width: 600px; }
+.hero-content .pre-title {
+  font-size: 14px; text-transform: uppercase; letter-spacing: 4px;
+  color: #e50914; margin-bottom: 16px;
+}
+.hero-content h1 { font-size: 64px; font-weight: 900; letter-spacing: -2px; margin-bottom: 16px; }
+.hero-content .subtitle { font-size: 20px; color: #b3b3b3; margin-bottom: 24px; line-height: 1.6; }
+.hero-content .stats { display: flex; gap: 32px; margin-bottom: 32px; }
+.hero-content .stat { text-align: center; }
+.hero-content .stat .num { font-size: 36px; font-weight: 900; color: #e50914; }
+.hero-content .stat .label { font-size: 12px; color: #777; margin-top: 4px; text-transform: uppercase; letter-spacing: 2px; }
+.hero-actions { display: flex; gap: 16px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 32px; font-size: 16px; font-weight: 700;
+  border: none; border-radius: 4px; cursor: pointer;
+  text-decoration: none; transition: all 0.2s;
+}
+.btn-primary { background: #e50914; color: #fff; }
+.btn-primary:hover { background: #f6121d; transform: scale(1.05); }
+.btn-secondary {
+  background: rgba(109,109,110,0.7); color: #fff;
+}
+.btn-secondary:hover { background: rgba(109,109,110,0.5); }
+
+/* Sections */
+section { padding: 60px; }
+.section-title { font-size: 28px; font-weight: 700; margin-bottom: 24px; }
+
+/* Philosophy Cards */
+.philosophy { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.card {
+  position: relative; border-radius: 6px; overflow: hidden;
+  background: linear-gradient(135deg, #1a1a2e 0%, #162a1a 50%, #2a1a1a 100%);
+  padding: 40px 32px; min-height: 280px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: 1px solid #222;
+}
+.card:hover { transform: translateY(-8px); box-shadow: 0 16px 48px rgba(229,9,20,0.15); border-color: #e5091433; }
+.card .card-icon { font-size: 48px; margin-bottom: 20px; }
+.card h3 { font-size: 22px; font-weight: 700; margin-bottom: 12px; color: #fff; }
+.card p { font-size: 15px; color: #999; line-height: 1.7; }
+.card .card-tag {
+  display: inline-block; margin-top: 16px; padding: 6px 14px;
+  border-radius: 20px; font-size: 12px; font-weight: 600;
+  background: rgba(229,9,20,0.15); color: #e50914;
+}
+
+/* Timeline */
+.timeline { position: relative; padding-left: 32px; border-left: 2px solid #e5091433; }
+.timeline-item { margin-bottom: 32px; position: relative; }
+.timeline-item::before {
+  content: ''; position: absolute; left: -39px; top: 4px;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #e50914; box-shadow: 0 0 12px rgba(229,9,20,0.4);
+}
+.timeline-item .year { font-size: 14px; color: #e50914; font-weight: 700; margin-bottom: 4px; }
+.timeline-item h4 { font-size: 18px; margin-bottom: 6px; color: #fff; }
+.timeline-item p { font-size: 14px; color: #999; line-height: 1.6; }
+
+/* CTA */
+.cta {
+  margin: 60px; padding: 80px 60px; border-radius: 12px;
+  background: linear-gradient(135deg, #1a0000 0%, #0a0a0a 50%, #001a00 100%);
+  border: 1px solid #e5091433; text-align: center;
+  position: relative; overflow: hidden;
+}
+.cta::before {
+  content: ''; position: absolute; top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(circle at center, rgba(229,9,20,0.05) 0%, transparent 70%);
+  animation: pulse 4s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+.cta-content { position: relative; z-index: 1; }
+.cta h2 { font-size: 42px; font-weight: 900; margin-bottom: 16px; }
+.cta .price { font-size: 72px; font-weight: 900; color: #e50914; margin-bottom: 8px; }
+.cta .price small { font-size: 20px; color: #777; }
+.cta .perks { display: flex; justify-content: center; gap: 40px; margin: 32px 0; flex-wrap: wrap; }
+.cta .perk { text-align: center; }
+.cta .perk .check { font-size: 24px; margin-bottom: 8px; }
+.cta .perk span { font-size: 14px; color: #999; }
+.cta .note { margin-top: 16px; font-size: 13px; color: #555; }
+
+/* Quote */
+.quote {
+  text-align: center; padding: 80px 60px;
+  border-top: 1px solid #222; border-bottom: 1px solid #222;
+}
+.quote blockquote {
+  font-size: 28px; font-weight: 300; color: #ccc;
+  max-width: 700px; margin: 0 auto; line-height: 1.6;
+  font-style: italic;
+}
+.quote .author { margin-top: 16px; font-size: 14px; color: #e50914; font-style: normal; font-weight: 600; }
+
+/* Footer */
+footer { text-align: center; padding: 40px 60px; color: #555; font-size: 13px; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  nav { padding: 16px 24px; }
+  nav .nav-links { display: none; }
+  .hero { padding: 0 24px; }
+  .hero-content h1 { font-size: 40px; }
+  .philosophy { grid-template-columns: 1fr; }
+  section { padding: 40px 24px; }
+  .cta { margin: 24px; padding: 48px 24px; }
+  .cta h2 { font-size: 28px; }
+  .cta .price { font-size: 48px; }
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="logo">JFS</div>
+  <ul class="nav-links">
+    <li><a href="#philosophy">投资理念</a></li>
+    <li><a href="#timeline">投资历程</a></li>
+    <li><a href="#cta">加入会员</a></li>
+  </ul>
+  <div class="nav-right"></div>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="pre-title">价值投资者</div>
+    <h1>蒋福森</h1>
+    <div class="subtitle">32岁 · 专注价值投资、长线投资与景气度投资<br>在周期中寻找确定性，在时间中等待复利</div>
+    <div class="stats">
+      <div class="stat"><div class="num">10+</div><div class="label">年投资经验</div></div>
+      <div class="stat"><div class="num">价值</div><div class="label">投资理念</div></div>
+      <div class="stat"><div class="num">长线</div><div class="label">持仓策略</div></div>
+    </div>
+    <div class="hero-actions">
+      <a href="#cta" class="btn btn-primary">加入会员 ¥199</a>
+      <a href="#philosophy" class="btn btn-secondary">了解更多</a>
+    </div>
+  </div>
+</div>
+
+<!-- Philosophy -->
+<section id="philosophy">
+  <div class="section-title">投资理念</div>
+  <div class="philosophy">
+    <div class="card">
+      <div class="card-icon">📈</div>
+      <h3>价值投资</h3>
+      <p>以低于内在价值的价格买入优质资产，相信价格终将回归价值。关注企业基本面，挑选具有护城河的优质公司。</p>
+      <div class="card-tag">核心策略</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">⏳</div>
+      <h3>长线投资</h3>
+      <p>时间是优秀企业的朋友。拒绝频繁交易，以年度为单位持有优质标的，让复利的力量在时间中发酵。</p>
+      <div class="card-tag">持仓哲学</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🌊</div>
+      <h3>景气度投资</h3>
+      <p>顺大势，逆小势。在行业景气上行周期中积极布局，在景气拐点时果断决策。把握产业趋势的浪潮。</p>
+      <div class="card-tag">择时框架</div>
+    </div>
+  </div>
+</section>
+
+<!-- Timeline -->
+<section id="timeline">
+  <div class="section-title">投资历程</div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="year">2014</div>
+      <h4>初入市场</h4>
+      <p>22岁开始接触A股，经历牛熊转换，对市场产生了深刻敬畏。</p>
+    </div>
+    <div class="timeline-item">
+      <div class="year">2018</div>
+      <h4>确立价值投资体系</h4>
+      <p>深度研读格雷厄姆、巴菲特著作，摒弃短线思维，建立以价值为核心的投资框架。</p>
+    </div>
+    <div class="timeline-item">
+      <div class="year">2021</div>
+      <h4>融合景气度策略</h4>
+      <p>在价值投资基础上引入行业景气度分析，形成"价值+景气"双轮驱动模型。</p>
+    </div>
+    <div class="timeline-item">
+      <div class="year">2026</div>
+      <h4>开启会员社群</h4>
+      <p>将十余年经验系统化输出，帮助更多人建立理性的投资观念。</p>
+    </div>
+  </div>
+</section>
+
+<!-- Quote -->
+<div class="quote">
+  <blockquote>"投资不是一场智力的游戏，而是一场心性的修行。"</blockquote>
+  <div class="author">—— 蒋福森</div>
+</div>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta">
+    <div class="cta-content">
+      <h2>加入蒋福森投资会员</h2>
+      <div class="price">¥199 <small>/ 年</small></div>
+      <div class="perks">
+        <div class="perk"><div class="check">📊</div><span>每周市场复盘</span></div>
+        <div class="perk"><div class="check">📝</div><span>深度研报解读</span></div>
+        <div class="perk"><div class="check">💬</div><span>专属会员社群</span></div>
+        <div class="perk"><div class="check">🔔</div><span>投资机会提醒</span></div>
+      </div>
+      <a href="#" class="btn btn-primary" style="font-size:20px; padding:18px 48px;">立即加入 · ¥199/年</a>
+      <div class="note">现在加入可享7天无理由退款保障</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 蒋福森 · JIANG FUSEN INVESTMENT · 理性投资，长期主义</p>
+</footer>
+
+<script>
+// Nav scroll effect
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+</body>
+</html>
